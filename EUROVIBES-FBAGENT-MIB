@@ -1,0 +1,106 @@
+EUROVIBES-FBAGENT-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, Integer32
+	FROM SNMPv2-SMI
+    projects
+        FROM EUROVIBES-PROJECTS-MIB;
+
+fbagent MODULE-IDENTITY
+    LAST-UPDATED "201710080000Z"
+    ORGANIZATION "EUROVIBES"
+    CONTACT-INFO
+	 "postal:   EUROVIBES
+	 	    c/o Benedikt Spranger
+                    Untere Weitfeldstr. 8
+                    D-88690 Uhldingen-Muehlhofen
+
+          email:    bene@eurovibes.org"
+    DESCRIPTION
+	"Definition of all eurovibes projects."
+
+    REVISION "201710080000Z"
+    DESCRIPTION
+	"First draft"
+
+    ::= { projects 1 }
+
+-- fbagent box table
+
+fbagentBoxTable OBJECT-TYPE
+    SYNTAX	SEQUENCE OF FBAGENTBOXENTRY
+    MAX-ACCESS	not-accessible
+    STATUS      current
+    DESCRIPTION
+	"Table of identified router boxes."
+
+    ::= { fbagent 1 }
+
+fbagentBoxEntry OBJECT-TYPE
+    SYNTAX	FBAGENTBOXENTRY
+    MAX-ACCESS	not-accessible
+    STATUS      current
+    DESCRIPTION
+	" "
+    INDEX	{ fbagentBoxUDN }
+    ::= { fbagentBoxTable 1 }
+
+FBAGENTBOXENTRY ::= SEQUENCE {
+fbagentBoxUDN			OCTET STRING,
+fbagentBoxName			OCTET STRING,
+fbagentBoxUpstreamMaxBitRate	INTEGER,
+fbagentBoxDownstreamMaxBitRate	INTEGER,
+fbagentPhysicalLinkStatus	INTEGER
+}
+
+fbagentBoxUDN OBJECT-TYPE
+    SYNTAX	OCTET STRING (SIZE(1..64))
+    MAX-ACCESS	not-accessible
+    STATUS	current
+    DESCRIPTION
+	" "
+    ::= { fbagentBoxEntry 1 }
+
+fbagentBoxName	OBJECT-TYPE
+    SYNTAX	OCTET STRING
+    MAX-ACCESS	read-only
+    STATUS	current
+    DESCRIPTION
+        " "
+    ::= { fbagentBoxEntry 2 }
+
+fbagentBoxUpstreamMaxBitRate OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { fbagentBoxEntry 3 }
+
+fbagentBoxDownstreamMaxBitRate OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { fbagentBoxEntry 4 }
+
+fbagentPhysicalLinkStatus OBJECT-TYPE
+    SYNTAX	INTEGER {
+    			up(1),
+			down(2),
+			iniitializing(3),
+			unavailable(4)
+		}
+    MAX-ACCESS	read-only
+    STATUS	current
+    DESCRIPTION
+        " "
+    ::= { fbagentBoxEntry 5 }
+
+END
+-- Local Variables:
+-- mode: snmpv2
+-- End:

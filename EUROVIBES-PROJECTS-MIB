@@ -1,0 +1,33 @@
+EUROVIBES-PROJECTS-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY
+	FROM SNMPv2-SMI
+    eurovibes
+        FROM EUROVIBES-MIB;
+
+projects MODULE-IDENTITY
+    LAST-UPDATED "201710080000Z"
+    ORGANIZATION "EUROVIBES"
+    CONTACT-INFO
+	 "postal:   EUROVIBES
+	 	    c/o Benedikt Spranger
+                    Untere Weitfeldstr. 8
+                    D-88690 Uhldingen-Muehlhofen
+
+          email:    bene@eurovibes.org"
+    DESCRIPTION
+	"Definition of all eurovibes projects."
+
+    REVISION "201710080000Z"
+    DESCRIPTION
+	"First draft"
+
+    ::= { eurovibes 2 }
+
+END
+
+-- https://creativecommons.org/licenses/by-nd/4.0/
+-- Local Variables:
+-- mode: snmpv2
+-- End:

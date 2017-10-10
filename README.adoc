@@ -1,0 +1,30 @@
+EUROVIBES MIBS
+==============
+
+This is the EUROVIBES MIB (OID _enterprises 50821_) database repository.
+
+Structure
+---------
+
+eurovibes
+~~~~~~~~~
+  1. general
+  2. projects
+
+general
+^^^^^^^
+  1. mibVersion: The MIB version that is used by the SNMP agent.
+
+projects
+^^^^^^^^
+  1. fbagent: UPnP igd to SNMP gateway
+
+Terms of use
+------------
+This work is licensed under the Creative Commons Attribution-NoDerivatives 4.0
+International License. To view a copy of this license, visit
+http://creativecommons.org/licenses/by-nd/4.0/.
+
+Dieses Material steht unter der Creative-Commons-Lizenz Namensnennung -
+Keine Bearbeitungen 4.0 International. Um eine Kopie dieser Lizenz zu
+sehen, besuchen Sie http://creativecommons.org/licenses/by-nd/4.0/.

@@ -1,0 +1,48 @@
+EUROVIBES-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY,
+    OBJECT-TYPE,
+    enterprises
+        FROM SNMPv2-SMI
+    DisplayString
+        FROM SNMPv2-TC;
+
+eurovibes MODULE-IDENTITY
+    LAST-UPDATED "201710080000Z"
+    ORGANIZATION "EUROVIBES"
+    CONTACT-INFO
+	 "postal:   EUROVIBES
+	 	    c/o Benedikt Spranger
+                    Untere Weitfeldstr. 8
+                    D-88690 Uhldingen-Muehlhofen
+
+          email:    bene@eurovibes.org"
+    DESCRIPTION
+	"The management information base for the eurovibes projects."
+
+    REVISION "201710080000Z"
+    DESCRIPTION
+	"Initial version"
+
+    ::= { enterprises 50821 }
+
+-- General objects
+
+general OBJECT IDENTIFIER
+    ::= { eurovibes 1 }
+
+mibVersion OBJECT-TYPE
+    SYNTAX DisplayString
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The MIB version that is used by the SNMP agent."
+    ::= { general 1 }
+
+END
+
+-- https://creativecommons.org/licenses/by-nd/4.0/
+-- Local Variables:
+-- mode: snmpv2
+-- End:
