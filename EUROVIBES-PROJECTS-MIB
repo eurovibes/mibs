@@ -7,7 +7,7 @@ IMPORTS
         FROM EUROVIBES-MIB;
 
 projects MODULE-IDENTITY
-    LAST-UPDATED "201710080000Z"
+    LAST-UPDATED "201710120340Z"
     ORGANIZATION "EUROVIBES"
     CONTACT-INFO
 	 "postal:   EUROVIBES
@@ -19,10 +19,26 @@ projects MODULE-IDENTITY
     DESCRIPTION
 	"Definition of all eurovibes projects."
 
-    REVISION "201710080000Z"
+    -- Revision block
+    -- 71e7783d62a1c8a9c5e586f16c09a46808377416
+    REVISION "201710120340Z"
     DESCRIPTION
-	"First draft"
+    "Add a revision block marker
+    For a simpler release management the reviision tags should be match
+    to the git commits and created by a script. To avoid complete MIB
+    parsing add a revision marker.
 
+    Signed-off-by: Benedikt Spranger <bene@eurovibes.org>
+    "
+
+    -- 21f4c6bc652def1f1690f24d440c003fb3776834
+    REVISION "201710101634Z"
+    DESCRIPTION
+    "Initial version
+    This repository contains the EUROVIBES MIB definitions.
+
+    Signed-off-by: Benedikt Spranger <bene@eurovibes.org>
+    "
     ::= { eurovibes 2 }
 
 END

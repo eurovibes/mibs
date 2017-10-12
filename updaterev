@@ -1,0 +1,33 @@
+#!/usr/bin/awk -f
+
+BEGIN {
+	inrev = 0;
+}
+{
+	if (index ($0, "::="))
+		inrev = 0;
+
+	if (!inrev)
+		print $0;
+
+	revblock = index ($0, "-- Revision block")
+	if (revblock)
+	{
+		newrev = FILENAME ".rev";
+
+		indent = "";
+		for (i = 1; i < revblock; i++)
+			indent = indent " ";
+
+		while ((getline line < newrev) > 0)
+		{
+			if (line)
+				print indent line;
+			else
+				print "";
+		}
+		close (newrev)
+
+		inrev = 1;
+	}
+}

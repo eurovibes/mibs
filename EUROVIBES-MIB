@@ -1,15 +1,20 @@
 EUROVIBES-MIB DEFINITIONS ::= BEGIN
 
 IMPORTS
+    MODULE-COMPLIANCE,
+    OBJECT-GROUP
+	FROM SNMPv2-CONF
+
     MODULE-IDENTITY,
     OBJECT-TYPE,
     enterprises
         FROM SNMPv2-SMI
+
     DisplayString
         FROM SNMPv2-TC;
 
 eurovibes MODULE-IDENTITY
-    LAST-UPDATED "201710080000Z"
+    LAST-UPDATED "201710120340Z"
     ORGANIZATION "EUROVIBES"
     CONTACT-INFO
 	 "postal:   EUROVIBES
@@ -21,16 +26,65 @@ eurovibes MODULE-IDENTITY
     DESCRIPTION
 	"The management information base for the eurovibes projects."
 
-    REVISION "201710080000Z"
+    -- Revision block
+    -- 71e7783d62a1c8a9c5e586f16c09a46808377416
+    REVISION "201710120340Z"
     DESCRIPTION
-	"Initial version"
+    "Add a revision block marker
+    For a simpler release management the reviision tags should be match
+    to the git commits and created by a script. To avoid complete MIB
+    parsing add a revision marker.
 
+    Signed-off-by: Benedikt Spranger <bene@eurovibes.org>
+    "
+
+    -- 3b64b5163ecea05525c23d73647dabdab250956e
+    REVISION "201710110443Z"
+    DESCRIPTION
+    "Add Compliance entries.
+    STD58 - RFC 2580 Conformance Statements for SMIv2 demand for
+    conformance statements in MIBs. Add these statements to be compliant
+    to the standard.
+
+    Signed-off-by: Benedikt Spranger <bene@eurovibes.org>
+    "
+
+    -- 21f4c6bc652def1f1690f24d440c003fb3776834
+    REVISION "201710101634Z"
+    DESCRIPTION
+    "Initial version
+    This repository contains the EUROVIBES MIB definitions.
+
+    Signed-off-by: Benedikt Spranger <bene@eurovibes.org>
+    "
     ::= { enterprises 50821 }
 
 -- General objects
 
 general OBJECT IDENTIFIER
     ::= { eurovibes 1 }
+
+eurovibesGroups OBJECT IDENTIFIER
+    ::= { eurovibes 2 }
+
+eurovibesCompliances OBJECT IDENTIFIER
+    ::= { eurovibes 3 }
+
+eurovibesGeneralGroup OBJECT-GROUP
+    OBJECTS { mibVersion }
+    STATUS  current
+    DESCRIPTION
+            "EUROVIBES general MIB Group"
+    ::= { eurovibesGroups 1 }
+
+eurovibesCompliance MODULE-COMPLIANCE
+    STATUS  current
+    DESCRIPTION
+           "The compliance statement for the EUROVIBES v1 entities which
+           implement the EUROVIBES MIB."
+      MODULE
+      MANDATORY-GROUPS { eurovibesGeneralGroup }
+::= { eurovibesCompliances 1 }
 
 mibVersion OBJECT-TYPE
     SYNTAX DisplayString
