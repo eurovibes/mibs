@@ -1,0 +1,284 @@
+EUROVIBES-BBALARM-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-COMPLIANCE,
+    OBJECT-GROUP
+	FROM SNMPv2-CONF
+
+    MODULE-IDENTITY,
+    OBJECT-TYPE,
+    Integer32,
+    Unsigned32
+	FROM SNMPv2-SMI
+
+    projects
+        FROM EUROVIBES-PROJECTS-MIB;
+
+bbalarm MODULE-IDENTITY
+    LAST-UPDATED "202207042127Z"
+    ORGANIZATION "EUROVIBES"
+    CONTACT-INFO
+	 "postal:   EUROVIBES
+	 	    c/o Benedikt Spranger
+                    Untere Weitfeldstr. 8
+                    D-88690 Uhldingen-Muehlhofen
+
+          email:    bene@eurovibes.org"
+    DESCRIPTION
+	"Definition of bbalarm project."
+
+    -- Revision block
+    -- 88654c59a43e37d1dc5529aefedf4cfc05c62815
+    REVISION "202207042127Z"
+    DESCRIPTION
+    "Projekt BBAlarm added
+    The Beaglebone Cape BBAlarm (https://github.com/eurovibes/bbbalarm)
+    contains a SHT35-DIS-F Humidity/Temperature sensor beside PIR sensors and
+    two decoupled inputs. Add a MIB to represent these values.
+
+    Signed-off-by: Benedikt Spranger <b.spranger@linutronix.de>
+    "
+    ::= { projects 3 }
+
+bbalarmVars OBJECT IDENTIFIER
+    ::= { bbalarm 1 }
+
+bbalarmGroups OBJECT IDENTIFIER
+    ::= { bbalarm 2 }
+
+bbalarmCompliances OBJECT IDENTIFIER
+    ::= { bbalarm 3 }
+
+bbalarmGroup OBJECT-GROUP
+    OBJECTS {
+    bbalarmHumidity,
+    bbalarmTemperature,
+    bbalarmHumidityAvg1,
+    bbalarmTemperatureAvg1,
+    bbalarmHumidityAvg5,
+    bbalarmTemperatureAvg5,
+    bbalarmHumidityAvg15,
+    bbalarmTemperatureAvg15,
+    bbalarmHumidityAvg30,
+    bbalarmTemperatureAvg30,
+    bbalarmHumidityAvg60,
+    bbalarmTemperatureAvg60,
+    bbalarmGPI1,
+    bbalarmGPI2,
+    bbalarmGPI1changes,
+    bbalarmGPI2changes,
+    bbalarmPIR1,
+    bbalarmPIR2,
+    bbalarmPIR1changes,
+    bbalarmPIR2changes
+    }
+    STATUS  current
+    DESCRIPTION
+            "bbalarm object group"
+    ::= { bbalarmGroups 1 }
+
+bbalarmCompliance MODULE-COMPLIANCE
+    STATUS  current
+    DESCRIPTION
+           "The compliance statement for the bbalarm v1 entities which
+           implement the bbalarm MIB."
+      MODULE
+      MANDATORY-GROUPS { bbalarmGroup }
+::= { bbalarmCompliances 1 }
+
+bbalarmTemperatureGroup OBJECT IDENTIFIER
+::= { bbalarmVars 1 }
+
+bbalarmHumidityGroup OBJECT IDENTIFIER
+::= { bbalarmVars 2 }
+
+bbalarmGPIGroup OBJECT IDENTIFIER
+::= { bbalarmVars 3 }
+
+bbalarmPIRGroup OBJECT IDENTIFIER
+::= { bbalarmVars 4 }
+
+bbalarmHumidity OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmHumidityGroup 1 }
+
+bbalarmHumidityAvg1 OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmHumidityGroup 2 }
+
+bbalarmHumidityAvg5 OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmHumidityGroup 3 }
+
+bbalarmHumidityAvg15 OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmHumidityGroup 4 }
+
+bbalarmHumidityAvg30 OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmHumidityGroup 5 }
+
+bbalarmHumidityAvg60 OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmHumidityGroup 6 }
+
+bbalarmTemperature OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmTemperatureGroup 1 }
+
+bbalarmTemperatureAvg1 OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmTemperatureGroup 2 }
+
+bbalarmTemperatureAvg5 OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmTemperatureGroup 3 }
+
+bbalarmTemperatureAvg15 OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmTemperatureGroup 4 }
+
+bbalarmTemperatureAvg30 OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmTemperatureGroup 5 }
+
+bbalarmTemperatureAvg60 OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmTemperatureGroup 6 }
+
+bbalarmGPI1 OBJECT-TYPE
+    SYNTAX      INTEGER { invalid(0), true(1), false(2) }
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmGPIGroup 1 }
+
+bbalarmGPI2 OBJECT-TYPE
+    SYNTAX      INTEGER { invalid(0), true(1), false(2) }
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmGPIGroup 2 }
+
+bbalarmGPI1changes OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmGPIGroup 3 }
+
+bbalarmGPI2changes OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmGPIGroup 4 }
+
+bbalarmPIR1 OBJECT-TYPE
+    SYNTAX      INTEGER { invalid(0), true(1), false(2) }
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmPIRGroup 1 }
+
+bbalarmPIR2 OBJECT-TYPE
+    SYNTAX      INTEGER { invalid(0), true(1), false(2) }
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmPIRGroup 2 }
+
+bbalarmPIR1changes OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmPIRGroup 3 }
+
+bbalarmPIR2changes OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        " "
+    DEFVAL { 0 }
+    ::= { bbalarmPIRGroup 4 }
+
+END
+-- Local Variables:
+-- mode: snmpv2
+-- End:
